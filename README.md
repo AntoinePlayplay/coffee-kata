@@ -1,6 +1,8 @@
-# FrankenPHP Demo
+# Coffee machine
 
-A demo app using [FrankenPHP](https://frankenphp.dev) that uses
+https://simcap.github.io/coffeemachine/cm-first-iteration.html
+
+From a demo app using [FrankenPHP](https://frankenphp.dev) that uses
 Symfony and API Platform.
 
 ## Installation
