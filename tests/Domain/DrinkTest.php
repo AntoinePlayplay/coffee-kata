@@ -10,13 +10,13 @@ use PHPUnit\Framework\TestCase;
 
 class DrinkTest extends TestCase
 {
-    public function testItGet1StickForCoffeeWhenSugarNumberIsGreaterThan0(): void
+    public function testItGetAStickForCoffeeWhenSugarNumberIsGreaterThan0(): void
     {
         // Arrange
         $coffee = new Coffee(new Sugar(1));
 
         // Act && Assert
-        $this->assertSame(1, $coffee->getStick());
+        $this->assertSame('0', $coffee->getStick());
     }
 
     public function testItGetNoStickForCoffeeWhenSugarNumberIs0(): void
@@ -25,7 +25,7 @@ class DrinkTest extends TestCase
         $coffee = new Coffee(new Sugar(0));
 
         // Act && Assert
-        $this->assertSame(0, $coffee->getStick());
+        $this->assertNull($coffee->getStick());
     }
 
     public function testItGet1StickForChocolateWhenSugarNumberIsGreaterThan0(): void
@@ -34,7 +34,7 @@ class DrinkTest extends TestCase
         $chocolate = new Chocolate(new Sugar(1));
 
         // Act && Assert
-        $this->assertSame(1, $chocolate->getStick());
+        $this->assertSame('0', $chocolate->getStick());
     }
 
     public function testItGetNoStickForChocolateWhenSugarNumberIs0(): void
@@ -43,7 +43,7 @@ class DrinkTest extends TestCase
         $chocolate = new Chocolate(new Sugar(0));
 
         // Act && Assert
-        $this->assertSame(0, $chocolate->getStick());
+        $this->assertNull($chocolate->getStick());
     }
 
     public function testItGet1StickForTeaWhenSugarNumberIsGreaterThan0(): void
@@ -52,7 +52,7 @@ class DrinkTest extends TestCase
         $tea = new Tea(new Sugar(1));
 
         // Act && Assert
-        $this->assertSame(1, $tea->getStick());
+        $this->assertSame('0', $tea->getStick());
     }
 
     public function testItGetNoStickForTeaWhenSugarNumberIs0(): void
@@ -61,6 +61,6 @@ class DrinkTest extends TestCase
         $tea = new Tea(new Sugar(0));
 
         // Act && Assert
-        $this->assertSame(0, $tea->getStick());
+        $this->assertNull($tea->getStick());
     }
 }

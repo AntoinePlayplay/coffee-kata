@@ -14,7 +14,7 @@ class SugarTest extends TestCase
     /**
      * @dataProvider getNumberSugar
      */
-    public function testNumberSugarCanBeAdded(int $getNumberSugar): void
+    public function testNumberSugarCanBeAdded(?int $getNumberSugar): void
     {
         $sugar = new Sugar($getNumberSugar);
         $this->assertSame($getNumberSugar, $sugar->numberSugar);

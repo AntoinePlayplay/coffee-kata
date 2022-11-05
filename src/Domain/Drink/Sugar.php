@@ -19,8 +19,8 @@ class Sugar
         $this->numberSugar = $numberSugar;
     }
 
-    private function isValid(int $numberSugar): bool
+    private function isValid(?int $numberSugar): bool
     {
-        return $numberSugar === 1 || $numberSugar === 2;
+        return $numberSugar === 0 || $numberSugar === 1 || $numberSugar === 2;
     }
 }

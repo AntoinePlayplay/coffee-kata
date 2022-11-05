@@ -6,5 +6,8 @@ namespace App\Domain\Drink;
 
 class Tea extends Drink
 {
-
+    public function getInitial(): string
+    {
+        return 'T';
+    }
 }

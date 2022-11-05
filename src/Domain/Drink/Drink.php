@@ -7,17 +7,31 @@ namespace App\Domain\Drink;
 abstract class Drink
 {
     public int $sugar;
+    abstract public function getInitial(): string;
 
     public function __construct(Sugar $sugar)
     {
         $this->sugar = $sugar->numberSugar;
     }
 
-    private function isAddingStick(): bool {
+    public function getSugar(): ?string
+    {
+        return $this->sugar > 0 ? (string) $this->sugar : null;
+    }
+
+    private function isAddingStick(): bool
+    {
         return $this->sugar > 0;
     }
 
-    public function getStick(): int {
-        return $this->isAddingStick() ? 1 : 0;
+    public function getStick(): ?string
+    {
+        return $this->isAddingStick() ? '0' : null;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->getInitial() . ':' . $this->getSugar() . ':' . $this->getStick();
     }
 }
