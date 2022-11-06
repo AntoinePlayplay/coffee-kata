@@ -35,13 +35,13 @@ final class CoffeeMachineOrderCommandTest extends KernelTestCase
     public function testItReturnAMessageWithBadDrinkOrder(): void
     {
         // Act
-        $this->sut->execute(['drinkType' => 'M']);
+        $this->sut->execute(['drinkType' => 'Hello world!']);
 
         // Assert
         $this->sut->assertCommandIsSuccessful();
 
         // the output of the command in the console
         $output = $this->sut->getDisplay();
-        $this->assertStringContainsString('M:M', $output);
+        $this->assertStringContainsString('M:Hello world!', $output);
     }
 }
