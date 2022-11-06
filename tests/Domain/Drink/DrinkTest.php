@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Domain;
+namespace App\Tests\Domain\Drink;
 
 use App\Domain\Drink\Chocolate;
 use App\Domain\Drink\Coffee;

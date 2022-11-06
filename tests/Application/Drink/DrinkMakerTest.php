@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Application;
+namespace App\Tests\Application\Drink;
 
+use App\Application\Drink\BadDrinkTypeException;
 use App\Application\Drink\DrinkMaker;
 use PHPUnit\Framework\TestCase;
 
@@ -49,5 +50,14 @@ class DrinkMakerTest extends TestCase
 
         // Assert
         $this->assertSame("$drinkInitial::", $order);
+    }
+
+    public function testItThrowsBadDrinkTypeExceptionWhenTheOrderIsAnUnknownDrink(): void
+    {
+        // Assert
+        $this->expectException(BadDrinkTypeException::class);
+
+        // Act
+        $this->sut->sendOrder('X', 0);
     }
 }

@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Tests\Domain;
+namespace App\Tests\Domain\Drink;
 
-use App\Domain\Drink\Chocolate;
-use App\Domain\Drink\Coffee;
 use App\Domain\Drink\Sugar;
-use App\Domain\Drink\Tea;
 use DomainException;
 use PHPUnit\Framework\TestCase;
 

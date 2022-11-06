@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Interface\Command;
 
+use App\Application\CoffeeMachine;
 use App\Application\Drink\DrinkMaker;
 use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -15,18 +16,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'coffee-machine:order')]
 class CoffeeMachineOrderCommand extends Command
 {
-    private DrinkMaker $drinkMaker;
+    private CoffeeMachine $coffeeMachine;
 
-    public function __construct(DrinkMaker $drinkMaker)
+    public function __construct(CoffeeMachine $coffeeMachine)
     {
-        $this->drinkMaker = $drinkMaker;
+        $this->coffeeMachine = $coffeeMachine;
         parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $order = $this->drinkMaker->sendOrder(
+            $order = $this->coffeeMachine->sendOrder(
                 $input->getArgument('drinkType'),
                 (int) $input->getArgument('numberOfSugar')
             );

@@ -21,14 +21,11 @@ final class DrinkMaker
 
     public function getDrink(string $drinkType, int $numberOfSugar): Drink
     {
-        switch ($drinkType) {
-            default:
-            case 'C':
-                return new Coffee(new Sugar($numberOfSugar));
-            case 'H':
-                return new Chocolate(new Sugar($numberOfSugar));
-            case 'T':
-                return new Tea(new Sugar($numberOfSugar));
-        }
+        return match ($drinkType) {
+            'C' => new Coffee(new Sugar($numberOfSugar)),
+            'H' => new Chocolate(new Sugar($numberOfSugar)),
+            'T' => new Tea(new Sugar($numberOfSugar)),
+            default => throw new BadDrinkTypeException("Bad drink type: $drinkType"),
+        };
     }
 }
