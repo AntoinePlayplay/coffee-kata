@@ -31,7 +31,7 @@ class CoffeeMachineTest extends TestCase
         $order = $this->sut->sendOrder($drinkType, 0, 0.6);
 
         // Assert
-        $this->assertSame(["$drinkType::"], $order);
+        $this->assertSame("$drinkType::", $order[0]);
     }
 
     /** @dataProvider drinkType */
@@ -41,7 +41,17 @@ class CoffeeMachineTest extends TestCase
         $order = $this->sut->sendOrder($drinkType, 2, 0.6);
 
         // Assert
-        $this->assertSame(["$drinkType:2:0"], $order);
+        $this->assertSame("$drinkType:2:0", $order[0]);
+    }
+
+    /** @dataProvider drinkType */
+    public function testItReturnsTheRemainingMoneyForADrink($drinkType): void
+    {
+        // Act
+        $order = $this->sut->sendOrder($drinkType, 0, 0.9);
+
+        // Assert
+        $this->assertStringContainsString('M:Returning money', $order[1]);
     }
 
     /** @dataProvider drinkType */

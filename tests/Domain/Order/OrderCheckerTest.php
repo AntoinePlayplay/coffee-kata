@@ -34,10 +34,10 @@ class OrderCheckerTest extends TestCase
     public function testOrderMoneyHasEnoughMoneyForACoffee(Drink $drink, float $money): void
     {
         // Act
-        $hasEnoughMoney = $this->sut->hasEnoughMoney($drink, $money);
+        $hasEnoughMoney = $this->sut->getRemainingMoney($drink, $money);
 
         // Assert
-        $this->assertTrue($hasEnoughMoney);
+        $this->assertSame(0.0, $hasEnoughMoney);
     }
 
     private function moreMoneyOrder(): array
@@ -53,10 +53,10 @@ class OrderCheckerTest extends TestCase
     public function testOrderMoneyHasMoreMoneyForACoffee(Drink $drink, float $money): void
     {
         // Act
-        $hasEnoughMoney = $this->sut->hasEnoughMoney($drink, $money);
+        $hasEnoughMoney = $this->sut->getRemainingMoney($drink, $money);
 
         // Assert
-        $this->assertTrue($hasEnoughMoney);
+        $this->assertGreaterThan(0, $hasEnoughMoney);
     }
 
     private function badOrder(): array
@@ -72,9 +72,9 @@ class OrderCheckerTest extends TestCase
     public function testOrderMoneyHasNotEnoughMoneyForACoffee(Drink $drink, float $money): void
     {
         // Act
-        $hasEnoughMoney = $this->sut->hasEnoughMoney($drink, $money);
+        $hasEnoughMoney = $this->sut->getRemainingMoney($drink, $money);
 
         // Assert
-        $this->assertFalse($hasEnoughMoney);
+        $this->assertLessThan(0, $hasEnoughMoney);
     }
 }

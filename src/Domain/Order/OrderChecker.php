@@ -19,8 +19,8 @@ final class OrderChecker
         return $menu[$drink->getInitial()];
     }
 
-    public function hasEnoughMoney(Drink $drink, float $money): bool
+    public function getRemainingMoney(Drink $drink, float $money): float
     {
-        return $money >= $this->orderList($drink);
+        return $money - $this->orderList($drink);
     }
 }

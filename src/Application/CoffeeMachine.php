@@ -34,8 +34,13 @@ final class CoffeeMachine
             $drink = $this->drinkDeserializer->getDrink($drinkType, $numberOfSugar);
 
             $messages = [];
-            if ($this->orderChecker->hasEnoughMoney($drink, $totalMoney)) {
+            $remainingMoney = $this->orderChecker->getRemainingMoney($drink, $totalMoney);
+            if ($remainingMoney >= 0) {
                 $messages[] = $this->drinkMaker->sendOrder($drink);
+
+                if ($remainingMoney > 0) {
+                    $messages[] = $this->getMessage("Returning money: $remainingMoney");
+                }
             } else {
                 $messages[] = $this->getMessage('Not enough money');
             }
