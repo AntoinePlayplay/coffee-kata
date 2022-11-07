@@ -29,7 +29,8 @@ class CoffeeMachineOrderCommand extends Command
         try {
             $order = $this->coffeeMachine->sendOrder(
                 $input->getArgument('drinkType'),
-                (int) $input->getArgument('numberOfSugar')
+                (int) $input->getArgument('numberOfSugar'),
+                (float) $input->getArgument('money'),
             );
             $output->writeln($order);
             return Command::SUCCESS;
@@ -41,6 +42,7 @@ class CoffeeMachineOrderCommand extends Command
     protected function configure(): void
     {
         $this
+            ->addArgument('money', InputArgument::REQUIRED , 'Money of customer')
             ->addArgument('drinkType', InputArgument::REQUIRED , 'Drink type')
             ->addArgument('numberOfSugar', InputArgument::OPTIONAL , 'Number of sugar');
     }

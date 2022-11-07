@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Drink;
 
-use App\Application\Drink\BadDrinkTypeException;
 use App\Application\Drink\DrinkMaker;
+use App\Domain\Drink\Chocolate;
+use App\Domain\Drink\Coffee;
+use App\Domain\Drink\Drink;
+use App\Domain\Drink\Sugar;
+use App\Domain\Drink\Tea;
 use PHPUnit\Framework\TestCase;
 
 class DrinkMakerTest extends TestCase
@@ -17,47 +21,18 @@ class DrinkMakerTest extends TestCase
         $this->sut = new DrinkMaker();
     }
 
-    public function drinkInitial(): array
+    public function drink(): array
     {
-        return [['C'], ['H'], ['T']];
+        return [[new Coffee(new Sugar(2))], [new Chocolate(new Sugar(2))], [new Tea(new Sugar(2))]];
     }
 
-    /** @dataProvider drinkInitial */
-    public function testItReturnsTheOrderForADrinkWith2Sugar($drinkInitial): void
+    /** @dataProvider drink */
+    public function testItReturnsTheOrderForADrinkWith2Sugar(Drink $drink): void
     {
         // Act
-        $order = $this->sut->sendOrder($drinkInitial, 2);
+        $order = $this->sut->sendOrder($drink);
 
         // Assert
-        $this->assertSame("$drinkInitial:2:0", $order);
-    }
-
-    /** @dataProvider drinkInitial */
-    public function testItReturnsTheOrderForADrinkWith1Sugar($drinkInitial): void
-    {
-        // Act
-        $order = $this->sut->sendOrder($drinkInitial, 1);
-
-        // Assert
-        $this->assertSame("$drinkInitial:1:0", $order);
-    }
-
-    /** @dataProvider drinkInitial */
-    public function testItReturnsTheOrderForADrinkWithNoSugar($drinkInitial): void
-    {
-        // Act
-        $order = $this->sut->sendOrder($drinkInitial, 0);
-
-        // Assert
-        $this->assertSame("$drinkInitial::", $order);
-    }
-
-    public function testItThrowsBadDrinkTypeExceptionWhenTheOrderIsAnUnknownDrink(): void
-    {
-        // Assert
-        $this->expectException(BadDrinkTypeException::class);
-
-        // Act
-        $this->sut->sendOrder('X', 0);
+        $this->assertSame("{$drink->getInitial()}:2:0", $order);
     }
 }

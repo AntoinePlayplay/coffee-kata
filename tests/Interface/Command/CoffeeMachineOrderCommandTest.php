@@ -22,7 +22,7 @@ final class CoffeeMachineOrderCommandTest extends KernelTestCase
     public function testItExecutesSuccessfullyWithRightDrinkOrder(): void
     {
         // Act
-        $this->sut->execute(['drinkType' => 'C', 'numberOfSugar' => '1']);
+        $this->sut->execute([ 'money' => '0.6', 'drinkType' => 'C', 'numberOfSugar' => '1',]);
 
         // Assert
         $this->sut->assertCommandIsSuccessful();
@@ -32,10 +32,23 @@ final class CoffeeMachineOrderCommandTest extends KernelTestCase
         $this->assertStringContainsString('C:1:0', $output);
     }
 
+    public function testItExecutesWithRightDrinkOrderButWithNotEnoughMoney(): void
+    {
+        // Act
+        $this->sut->execute([ 'money' => '0.1', 'drinkType' => 'C', 'numberOfSugar' => '1',]);
+
+        // Assert
+        $this->sut->assertCommandIsSuccessful();
+
+        // the output of the command in the console
+        $output = $this->sut->getDisplay();
+        $this->assertStringContainsString('M:Not enough money', $output);
+    }
+
     public function testItReturnAMessageWithBadDrinkOrder(): void
     {
         // Act
-        $this->sut->execute(['drinkType' => 'Hello world!']);
+        $this->sut->execute(['drinkType' => 'Hello world!', 'money' => '0']);
 
         // Assert
         $this->sut->assertCommandIsSuccessful();
